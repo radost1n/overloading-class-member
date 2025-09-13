@@ -1,27 +1,34 @@
 // Задача: Перегрузка методов — Print
 // Реализуйте перегруженные методы Print согласно README. Методы должны возвращать строку.
 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace App.MethodOverloading.Task3_PrintFormatter;
 
 public static class Printer
 {
     public static string Print(int value)
     {
-        throw new NotImplementedException();
+        return value.ToString();
     }
 
     public static string Print(double value, int decimals)
     {
-        throw new NotImplementedException();
+        return value.ToString($"F{decimals}");
     }
 
     public static string Print(params int[] values)
     {
-        throw new NotImplementedException();
+        return string.Join(", ", values);
     }
 
     public static string Print<T>(IEnumerable<T> values)
     {
-        throw new NotImplementedException();
+        if (values == null)
+            return string.Empty;
+        return string.Join(", ", values);
     }
 }

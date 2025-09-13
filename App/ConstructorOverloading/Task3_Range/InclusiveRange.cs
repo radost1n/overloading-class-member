@@ -8,21 +8,50 @@ public class InclusiveRange
     public int Start { get; private set; }
     public int End { get; private set; }
 
-    // Конструктор (start, end)
     public InclusiveRange(int start, int end)
     {
-        throw new NotImplementedException();
+        if (start <= end)
+        {
+            Start = start;
+            End = end;
+        }
+        else
+        {
+            Start = end;
+            End = start;
+        }
     }
 
-    // Конструктор из строки "start..end"
     public InclusiveRange(string s)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(s))
+            throw new ArgumentException("Input string cannot be null or empty.");
+
+        string[] parts = s.Split("..");
+        if (parts.Length != 2)
+            throw new FormatException("Input string must be in the format 'start..end'.");
+
+        if (!int.TryParse(parts[0].Trim(), out int start))
+            throw new FormatException("Start value is not a valid integer.");
+
+        if (!int.TryParse(parts[1].Trim(), out int end))
+            throw new FormatException("End value is not a valid integer.");
+
+        if (start <= end)
+        {
+            Start = start;
+            End = end;
+        }
+        else
+        {
+            Start = end;
+            End = start;
+        }
     }
 
-    // Конструктор из одного числа
     public InclusiveRange(int single)
     {
-        throw new NotImplementedException();
+        Start = single;
+        End = single;
     }
 }
